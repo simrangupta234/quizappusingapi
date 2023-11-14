@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import parse from "html-react-parser";
+
 
 function App() {
   const [quesNum, setQuesNum] = useState(1);
@@ -13,8 +13,7 @@ function App() {
   // const [allOptions, setAllOptions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // const html =' "" '
-  var str = 'Which internet company began life as an online bookstore called &#039;Cadabra&#039;?'
+  
   const handleSubmit = () => {
     const nextQues = currentQuestion + 1;
     if (nextQues < 10) {
