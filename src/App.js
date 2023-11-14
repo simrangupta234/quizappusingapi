@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import parse from "html-react-parser";
 
 function App() {
   const [quesNum, setQuesNum] = useState(1);
@@ -12,6 +13,8 @@ function App() {
   // const [allOptions, setAllOptions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // const html =' "" '
+  var str = 'Which internet company began life as an online bookstore called &#039;Cadabra&#039;?'
   const handleSubmit = () => {
     const nextQues = currentQuestion + 1;
     if (nextQues < 10) {
@@ -49,8 +52,6 @@ function App() {
     return incorrectAnswers;
   };
 
-  
-
   useEffect(() => {
     setIsLoading(true);
     fetch(
@@ -59,8 +60,9 @@ function App() {
       .then((response) => response.json())
       .then((d) => {
         setData(d);
+
         setIsLoading(false);
-         console.log(d);
+        console.log(d);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -87,9 +89,8 @@ function App() {
               <div className="question m-2 ">
                 <h5>
                   <b>({quesNum}/10). </b>
-                  {data.results &&
-                    data.results[currentQuestion] &&
-                    data.results[currentQuestion].question}
+                  {
+                  data.results[currentQuestion].question.replace(/&quot;/g, '"').replace(/&#039;/g, "'") }
                 </h5>
               </div>
               <div className="options d-flex flex-column justify-content-center align-items-center w-100">
@@ -104,7 +105,7 @@ function App() {
                         handleOptionClick(option, e);
                       }}
                     >
-                      {option}
+                      {option.replace(/&quot;/g, '"').replace(/&#039;/g, "'")}
                     </button>
                   ))}
               </div>
