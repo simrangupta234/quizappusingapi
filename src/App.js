@@ -61,7 +61,7 @@ function App() {
         setData(d);
 
         setIsLoading(false);
-        console.log(d);
+        // console.log(d);
       })
       .catch((error) => console.log(error));
   }, []);
